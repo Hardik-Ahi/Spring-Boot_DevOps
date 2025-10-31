@@ -12,7 +12,7 @@ public class Controller {
     
     @GetMapping
     public String greet(@RequestParam(defaultValue = "User") String param) {
-        return String.format("Hello %s!", param);
+        return String.format("Hello %s!!", param);
     }
     
 }
