@@ -26,10 +26,9 @@ resource "aws_instance" "demo" {
   user_data = <<-EOF
   #!/bin/bash
   sudo yum update -y
-  sudo yum install -y docker java-21-amazon-corretto
+  sudo yum install -y docker
   sudo service docker start
   sudo systemctl enable docker
-  java -version
   sudo usermod -aG docker ec2-user
   sudo docker pull ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
   sudo docker run -d -p 9090:9090 ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
