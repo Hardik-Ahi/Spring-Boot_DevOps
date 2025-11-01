@@ -3,16 +3,20 @@ package com.example.Application;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
 @RequestMapping("/")
 public class Controller {
+    private String[] db;
+
+    public Controller(){
+        db = new String[] {"item-1", "item-2", "item-3", "item-4"};
+    }
     
     @GetMapping
-    public String greet(@RequestParam(defaultValue = "User") String param) {
-        return String.format("Hello %s!!", param);
+    public String[] getData() {
+        return db;
     }
     
 }
