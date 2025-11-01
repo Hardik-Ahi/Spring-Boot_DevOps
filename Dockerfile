@@ -4,4 +4,4 @@ COPY build/libs/Application-*-SNAPSHOT.jar app.jar
 COPY /frontend /usr/share/nginx/html
 EXPOSE 9090
 EXPOSE 80
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
