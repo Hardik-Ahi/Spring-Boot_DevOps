@@ -37,7 +37,7 @@ resource "aws_instance" "demo" {
 
 resource "aws_security_group" "allow_traffic" {
   name        = "allow_traffic"
-  description = "Allow all inbound traffic"
+  description = "Allow inbound traffic for SSH and exposed port"
 }
 
 resource "aws_key_pair" "keyPair" {
@@ -45,12 +45,22 @@ resource "aws_key_pair" "keyPair" {
   public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEBkEfAiTo4isYALYxDm5Uv04VZ3TLwfI1luOTMugIee ahiha@AcerNitro5"
 }
 
-resource "aws_security_group_rule" "ingress" {
+resource "aws_security_group_rule" "ingress_ssh" {
+  type = "ingress"
+  protocol = "tcp"
+  security_group_id = aws_security_group.allow_traffic.id
+  from_port = 22  # start of port range
+  to_port = 22  # end of port range
+  cidr_blocks = [ "0.0.0.0/0" ]
+  ipv6_cidr_blocks = [ "::/0" ]
+}
+
+resource "aws_security_group_rule" "ingress_app" {
   type = "ingress"
   protocol = -1
   security_group_id = aws_security_group.allow_traffic.id
-  from_port = 0  # start of port range
-  to_port = 65535  # end of port range
+  from_port = 9090  # start of port range
+  to_port = 9090  # end of port range
   cidr_blocks = [ "0.0.0.0/0" ]
   ipv6_cidr_blocks = [ "::/0" ]
 }
