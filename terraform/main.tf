@@ -31,7 +31,7 @@ resource "aws_instance" "demo" {
   sudo systemctl enable docker
   sudo usermod -aG docker ec2-user
   sudo docker pull ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
-  sudo docker run -d -p 9090:80 ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
+  sudo docker run -d -p 9090:80 -p 9091:9090 ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
   EOF
 }
 
