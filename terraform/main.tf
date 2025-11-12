@@ -27,7 +27,7 @@ resource "aws_instance" "demo" {
   #!/bin/bash
   sudo yum update -y
   sudo yum install -y docker
-  sudo service docker start
+  sudo systemctl start docker
   sudo systemctl enable docker
   sudo usermod -aG docker ec2-user
   sudo docker pull ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
@@ -60,7 +60,7 @@ resource "aws_security_group_rule" "ingress_app" {
   protocol = -1
   security_group_id = aws_security_group.allow_traffic.id
   from_port = 9090  # start of port range
-  to_port = 9090  # end of port range
+  to_port = 9091  # end of port range
   cidr_blocks = [ "0.0.0.0/0" ]
   ipv6_cidr_blocks = [ "::/0" ]
 }
