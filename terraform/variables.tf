@@ -19,5 +19,5 @@ variable "DOCKER_REPO" {
 }
 
 variable "DOCKER_IMG" {
-  default = "spring-app"
+  default = "spring-backend"
 }

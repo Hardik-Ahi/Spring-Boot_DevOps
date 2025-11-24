@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "bucket-aws-aws-bucket"
+    key = "root/spring-backend_state"
+    region = "ap-south-1"
+  }
+}
+
 provider "aws" {
   region = var.AWS_REGION
 }
@@ -31,7 +39,7 @@ resource "aws_instance" "demo" {
   sudo systemctl enable docker
   sudo usermod -aG docker ec2-user
   sudo docker pull ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
-  sudo docker run -d -p 9090:80 -p 9091:9090 ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
+  sudo docker run -d -p 9090:9090 ${var.DOCKER_REPO}/${var.DOCKER_IMG}:latest
   EOF
 }
 
@@ -42,7 +50,7 @@ resource "aws_security_group" "allow_traffic" {
 
 resource "aws_key_pair" "keyPair" {
   key_name = "public-key-ec2"
-  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEBkEfAiTo4isYALYxDm5Uv04VZ3TLwfI1luOTMugIee ahiha@AcerNitro5"
+  public_key = file("/ssh_key.pub")
 }
 
 resource "aws_security_group_rule" "ingress_ssh" {
@@ -60,7 +68,7 @@ resource "aws_security_group_rule" "ingress_app" {
   protocol = -1
   security_group_id = aws_security_group.allow_traffic.id
   from_port = 9090  # start of port range
-  to_port = 9091  # end of port range
+  to_port = 9090  # end of port range
   cidr_blocks = [ "0.0.0.0/0" ]
   ipv6_cidr_blocks = [ "::/0" ]
 }
