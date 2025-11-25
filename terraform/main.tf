@@ -55,7 +55,7 @@ resource "aws_key_pair" "keyPair" {
 
 resource "aws_security_group_rule" "ingress_ssh" {
   type = "ingress"
-  protocol = "tcp"
+  protocol = -1
   security_group_id = aws_security_group.allow_traffic.id
   from_port = 22  # start of port range
   to_port = 22  # end of port range
