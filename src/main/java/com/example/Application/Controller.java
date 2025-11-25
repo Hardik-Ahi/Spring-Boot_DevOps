@@ -13,7 +13,7 @@ public class Controller {
     private String[] db;
 
     public Controller(){
-        db = new String[] {"item-1", "item-2", "item-3", "item-4"};
+        db = new String[] {"item-1", "item-2", "item-3", "item-4", "item-5"};
     }
     
     @GetMapping
