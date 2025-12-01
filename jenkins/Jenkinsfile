@@ -14,7 +14,8 @@ pipeline {
         }
         stage('Build Spring project') {
             steps {
-                sh './gradlew.sh :bootJar'
+                sh 'chmod +x gradlew'
+                sh './gradlew :bootJar'
             }
         }
         stage('Build Docker Image') {
