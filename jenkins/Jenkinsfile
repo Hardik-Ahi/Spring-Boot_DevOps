@@ -13,6 +13,9 @@ pipeline {
             }
         }
         stage('Build Spring project') {
+            environment {
+                JAVA_HOME = "/usr/lib/jvm/java-21-amazon-corretto.x86_64"
+            }
             steps {
                 sh 'chmod +x gradlew'
                 sh './gradlew :bootJar --info'
