@@ -6,7 +6,7 @@ A minimal, production-ready Spring Boot application demonstrating modern CI/CD p
 
 This project showcases a complete DevOps pipeline for a Java-based REST API, from local development to automated cloud deployment. It implements industry-standard tools and practices for containerization, continuous integration, and infrastructure provisioning.
 
-## Key Technologies
+## Technologies
 
 **Backend & Framework:**
 - Spring Boot 3.5.7 (Java 21)
